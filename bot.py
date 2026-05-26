@@ -58,6 +58,13 @@ async def mesaj_gonder():
     await bot.send_message(chat_id=CHAT_ID, text=metin, parse_mode="Markdown")
     logger.info("Zamanlanmış mesaj gönderildi.")
 
+# Gece yarısı mesajı
+async def gece_yarisi_mesaj():
+    bot = Bot(token=TOKEN)
+    metin = "Başladı lan mesain amk çocuğu geç pc başına 💀"
+    await bot.send_message(chat_id=CHAT_ID, text=metin)
+    logger.info("Gece yarısı mesajı gönderildi.")
+
 # /saat komutu — anlık, dakika+saniye dahil
 async def saat_komutu(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Bot mesajlarını yoksay
@@ -76,7 +83,13 @@ async def main():
     scheduler.add_job(
         mesaj_gonder,
         trigger="cron",
-        hour="0,3,6,9,12,15,18,21",
+        hour="3,6,9,12,15,18,21",
+        minute=0
+    )
+    scheduler.add_job(
+        gece_yarisi_mesaj,
+        trigger="cron",
+        hour=0,
         minute=0
     )
 
