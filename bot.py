@@ -51,13 +51,6 @@ def kalan_mesaj_olustur(ayrintili=False):
         "🔧 _develop by Berk@an_"
     )
 
-# Zamanlanmış mesaj — saat bazlı, dakika/saniye göstermez
-async def mesaj_gonder():
-    bot = Bot(token=TOKEN)
-    metin = kalan_mesaj_olustur(ayrintili=False)
-    await bot.send_message(chat_id=CHAT_ID, text=metin, parse_mode="Markdown")
-    logger.info("Zamanlanmış mesaj gönderildi.")
-
 # Gece yarısı mesajı
 async def gece_yarisi_mesaj():
     bot = Bot(token=TOKEN)
@@ -80,12 +73,6 @@ async def main():
     app.add_handler(CommandHandler("saat", saat_komutu, filters=~filters.VIA_BOT))
 
     scheduler = AsyncIOScheduler(timezone="Europe/Istanbul")
-    scheduler.add_job(
-        mesaj_gonder,
-        trigger="cron",
-        hour="3,6,9,12,15,18,21",
-        minute=0
-    )
     scheduler.add_job(
         gece_yarisi_mesaj,
         trigger="cron",
