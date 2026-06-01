@@ -54,7 +54,13 @@ def kalan_mesaj_olustur(ayrintili=False):
 # Gece yarısı mesajı
 async def gece_yarisi_mesaj():
     bot = Bot(token=TOKEN)
-    metin = "Başladı lan mesain amk çocuğu geç pc başına 💀"
+    metin = (
+        "Gececi orospular için mesai vakti düt düttt 🚂\n"
+        "Sağ baştan say!\n\n"
+        "Dölmüt\n"
+        "Dölrun\n"
+        "Dölrat"
+    )
     await bot.send_message(chat_id=CHAT_ID, text=metin)
     logger.info("Gece yarısı mesajı gönderildi.")
 
